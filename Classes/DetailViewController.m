@@ -7,10 +7,16 @@
 //
 
 #import "DetailViewController.h"
+#include <sqlite3.h>
 
 
 @implementation DetailViewController
 
+
+
+
+// group names
+NSString *CITY_NAMES[] = {@"Marseille", @"Paris", "Babeloued", "Kaboul", "En La Casa"};
 
 #pragma mark -
 #pragma mark Initialization

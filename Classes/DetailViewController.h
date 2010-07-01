@@ -10,7 +10,7 @@
 
 
 @interface DetailViewController : UITableViewController {
-
+	UITableView * myTableView;
 }
 
 @end

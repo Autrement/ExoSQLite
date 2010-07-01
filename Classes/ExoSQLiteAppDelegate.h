@@ -12,10 +12,12 @@
     
     UIWindow *window;
     UINavigationController *navigationController;
+	NSString *dbFilePath;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain, readonly) NSString *dbFilePath;
 
 @end
 

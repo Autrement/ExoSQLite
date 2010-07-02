@@ -25,13 +25,28 @@ NSString *ID_KEY   = @"id";
 NSMutableArray *hotelDetailItems;
 
 #pragma mark -
+
+	
+-(void)setIdHotel:(int)wesh {
+	idHotel = wesh;
+	
+}
+
+-(int)getIdHotel{
+	
+	return idHotel;
+	
+}
+
+#pragma mark Initialization
+
 - (void) loadDataFromDb {
 	NSLog (@"loadDataFromDb");
 	
 	sqlite3 *db;
 	int dbrc; 
 	ExoSQLiteAppDelegate *appDelegate = (ExoSQLiteAppDelegate*) 
-		[UIApplication sharedApplication].delegate;
+	[UIApplication sharedApplication].delegate;
 	const char* dbFilePathUTF8 = [appDelegate.dbFilePath UTF8String];
 	dbrc = sqlite3_open (dbFilePathUTF8, &db);
 	if (dbrc) {
@@ -40,13 +55,13 @@ NSMutableArray *hotelDetailItems;
 	}
 	NSLog (@"opened db");
 	
-
+	
 	sqlite3_stmt *dbps;
 	
 	NSString *queryStatementNS =
 	(@"select %@, %@\
-	from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
-
+	 from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
+	
 	const char *queryStatement = [queryStatementNS UTF8String];
 	dbrc = sqlite3_prepare_v2 (db, queryStatement, -1, &dbps, NULL);
 	NSLog (@"prepared statement");
@@ -55,11 +70,11 @@ NSMutableArray *hotelDetailItems;
 	hotelDetailItems = [[NSMutableArray alloc] initWithCapacity: 100];
 	
 	while ((dbrc = sqlite3_step (dbps)) == SQLITE_ROW) {
-
+		
 		NSString *nameValue = [[NSString alloc]
 							   initWithUTF8String: (char*) sqlite3_column_text (dbps, 0)];
 		NSString *cityValue = [[NSString alloc] 
-								initWithUTF8String: (char*) sqlite3_column_text (dbps, 1)];
+							   initWithUTF8String: (char*) sqlite3_column_text (dbps, 1)];
 		[hotelDetailItems addObject:nameValue];
 		[hotelDetailItems addObject:cityValue];
 		[nameValue release];
@@ -69,9 +84,22 @@ NSMutableArray *hotelDetailItems;
 	idHotel = nil;
 	sqlite3_finalize (dbps);
 	sqlite3_close(db);
-		
-}
 	
+}
+
+/*
+- (id)initWithStyle:(UITableViewStyle)style {
+    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+    if ((self = [super initWithStyle:style])) {
+    }
+    return self;
+}
+*/
+
+
+#pragma mark -
+#pragma mark View lifecycle
+
 - (void)viewDidLoad {
     
     sectionNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Description Hôtel", @"Description"), nil];
@@ -90,50 +118,6 @@ NSMutableArray *hotelDetailItems;
 	[super viewWillAppear:animated];
 	[self.tableView reloadData]; 
 }
-
--(void)setIdHotel:(int)wesh {
-	idHotel = wesh;
-	
-}
-
--(int)getIdHotel{
-	
-	return idHotel;
-	
-}
-
-#pragma mark Initialization
-
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if ((self = [super initWithStyle:style])) {
-    }
-    return self;
-}
-*/
-
-
-#pragma mark -
-#pragma mark View lifecycle
-
-/*
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-*/
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

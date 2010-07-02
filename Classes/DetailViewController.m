@@ -15,7 +15,7 @@
 
 @implementation DetailViewController
 
-@synthesize hotel, myTableView;
+@synthesize hotel, myTableView, idHotel;
 
 NSString *NAME_KEY = @"name";
 NSString *CITY_KEY = @"city";
@@ -29,13 +29,10 @@ NSMutableArray *hotelDetailItems;
 	
 -(void)setIdHotel:(int)wesh {
 	idHotel = wesh;
-	
 }
 
 -(int)getIdHotel{
-	
 	return idHotel;
-	
 }
 
 #pragma mark Initialization

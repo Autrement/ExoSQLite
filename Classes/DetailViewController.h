@@ -16,7 +16,7 @@
 	
 	UITableView * myTableView;
 	ListViewController * hotel;
-	int * idHotel;
+	int idHotel;
 	
 @private
     
@@ -25,11 +25,11 @@
     NSArray * rowController;
 }
 
--(void) setIdHotel:(int)wesh;
--(int) getIdHotel;
-
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) IBOutlet ListViewController * hotel;
+@property int idHotel;
 
+- (void) setIdHotel:(int)wesh;
+- (int) getIdHotel;
 
 @end

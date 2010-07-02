@@ -13,7 +13,7 @@
 
 @implementation EditPickerEditor
 
-@synthesize  myPicker, myArray, myTableView, myString;
+@synthesize  myPicker, myArray, myTableView, myString, detailController;
 
 #pragma mark View lifecycle
 

@@ -63,15 +63,16 @@ NSString *DATABASE_FILE_NAME = @"hotel.db";
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	
-	// copy the database from the bundle if necessary
-	if (! [self initializeDb]) {
-		// TODO: alert the user!
-		NSLog (@"couldn't init db");
-		return;
-	}	
+//	// copy the database from the bundle if necessary
+//	if (! [self initializeDb]) {
+//		// TODO: alert the user!
+//		NSLog (@"couldn't init db");
+//		return;
+//	}	
 	
     // Add the tab bar controller's current view as a subview of the window
-    [window insertSubview:navigationController.view atIndex:0];
+    [window addSubview:[navigationController view]];
+    [window makeKeyAndVisible];
 }
 
 

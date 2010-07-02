@@ -157,11 +157,11 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *GenericManagedObjectPickerEditorCell = @"GenericManagedObjectPickerEditorCell";
+    static NSString *EditPickerEditorCell = @"EditPickerEditorCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GenericManagedObjectPickerEditorCell];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EditPickerEditorCell];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:GenericManagedObjectPickerEditorCell] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:EditPickerEditorCell] autorelease];
 		cell.textLabel.font = [UIFont systemFontOfSize:17.0]; 
 		cell.textLabel.textColor = [UIColor colorWithRed:0.243 green:0.306 blue:0.435 alpha:1.0];
     }

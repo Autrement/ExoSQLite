@@ -14,6 +14,7 @@
 		243F515111DDDBAF00C76551 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 243F515011DDDBAF00C76551 /* libsqlite3.dylib */; };
 		243F516011DDDFD000C76551 /* EditAttributeEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F515F11DDDFD000C76551 /* EditAttributeEditor.m */; };
 		243F517311DDE1BC00C76551 /* EditStringEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F517211DDE1BC00C76551 /* EditStringEditor.m */; };
+		243F51C111DDEB6C00C76551 /* EditPickerEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F51C011DDEB6C00C76551 /* EditPickerEditor.m */; };
 		24BE403711DCC83000615ED1 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BE403611DCC83000615ED1 /* ListViewController.m */; };
 		24BE403A11DCC84100615ED1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BE403911DCC84100615ED1 /* DetailViewController.m */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -33,6 +34,8 @@
 		243F515F11DDDFD000C76551 /* EditAttributeEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAttributeEditor.m; sourceTree = "<group>"; };
 		243F517111DDE1BC00C76551 /* EditStringEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditStringEditor.h; sourceTree = "<group>"; };
 		243F517211DDE1BC00C76551 /* EditStringEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditStringEditor.m; sourceTree = "<group>"; };
+		243F51BF11DDEB6C00C76551 /* EditPickerEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPickerEditor.h; sourceTree = "<group>"; };
+		243F51C011DDEB6C00C76551 /* EditPickerEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPickerEditor.m; sourceTree = "<group>"; };
 		24BE403511DCC83000615ED1 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		24BE403611DCC83000615ED1 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		24BE403811DCC84100615ED1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 				243F515F11DDDFD000C76551 /* EditAttributeEditor.m */,
 				243F517111DDE1BC00C76551 /* EditStringEditor.h */,
 				243F517211DDE1BC00C76551 /* EditStringEditor.m */,
+				243F51BF11DDEB6C00C76551 /* EditPickerEditor.h */,
+				243F51C011DDEB6C00C76551 /* EditPickerEditor.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				24BE403A11DCC84100615ED1 /* DetailViewController.m in Sources */,
 				243F516011DDDFD000C76551 /* EditAttributeEditor.m in Sources */,
 				243F517311DDE1BC00C76551 /* EditStringEditor.m in Sources */,
+				243F51C111DDEB6C00C76551 /* EditPickerEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -110,9 +110,9 @@
 	UILabel *label = (UILabel *)[cell.contentView viewWithTag:kLabelTag];
 	
 	label.text = labelString; 
-	UITextField *textField = (UITextField *)[cell.contentView viewWithTag:kTextFieldTag];
+
+	// A Finir !
 	
-	[textField becomeFirstResponder]; 
 	return cell;
 	
 }

@@ -7,18 +7,90 @@
 //
 
 #import "DetailViewController.h"
+#import "ExoSQLiteAppDelegate.h"
+#import "ListViewController.h"
 #include <sqlite3.h>
 
 
 @implementation DetailViewController
 
+@synthesize hotel, myTableView, idHotel;
+
+NSString *NAME_KEY = @"name";
+NSString *CITY_KEY = @"city";
+NSString *ID_KEY   = @"id";
 
 
-
-// group names
-NSString *CITY_NAMES[] = {@"Marseille", @"Paris", "Babeloued", "Kaboul", "En La Casa"};
+NSMutableArray *hotelDetailItems;
 
 #pragma mark -
+- (void) loadDataFromDb {
+	NSLog (@"loadDataFromDb");
+	
+	sqlite3 *db;
+	int dbrc; 
+	ExoSQLiteAppDelegate *appDelegate = (ExoSQLiteAppDelegate*) 
+		[UIApplication sharedApplication].delegate;
+	const char* dbFilePathUTF8 = [appDelegate.dbFilePath UTF8String];
+	dbrc = sqlite3_open (dbFilePathUTF8, &db);
+	if (dbrc) {
+		NSLog (@"couldn't open db:");
+		return;
+	}
+	NSLog (@"opened db");
+	
+
+	sqlite3_stmt *dbps;
+	
+	NSString *queryStatementNS =
+	(@"select %@, %@\
+	from hotellist where %@ = %@", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
+
+	const char *queryStatement = [queryStatementNS UTF8String];
+	dbrc = sqlite3_prepare_v2 (db, queryStatement, -1, &dbps, NULL);
+	NSLog (@"prepared statement");
+	
+	[hotelDetailItems release];
+	hotelDetailItems = [[NSMutableArray alloc] initWithCapacity: 100];
+	
+	while ((dbrc = sqlite3_step (dbps)) == SQLITE_ROW) {
+
+		NSString *nameValue = [[NSString alloc]
+							   initWithUTF8String: (char*) sqlite3_column_text (dbps, 0)];
+		NSString *cityValue = [[NSString alloc] 
+								initWithUTF8String: (char*) sqlite3_column_text (dbps, 1)];
+		[hotelDetailItems addObject:nameValue];
+		[hotelDetailItems addObject:cityValue];
+		[nameValue release];
+		[cityValue release];
+	}
+	
+	idHotel = nil;
+	sqlite3_finalize (dbps);
+	sqlite3_close(db);
+		
+}
+	
+- (void)viewDidLoad {
+    
+    sectionNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Description Hôtel", @"Description"), nil];
+    
+    rowLabels = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Name",@"Name"), NSLocalizedString(@"City",@"City"), nil];
+    
+    rowController = [[NSArray alloc] initWithObjects:@"ManagedObjectStringEditor",@"ManagedObjectPickerEditor", nil];
+    
+    [super viewDidLoad];
+	
+	
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[self loadDataFromDb];
+	[super viewWillAppear:animated];
+	[self.tableView reloadData]; 
+}
+
+
 #pragma mark Initialization
 
 /*
@@ -80,13 +152,22 @@ NSString *CITY_NAMES[] = {@"Marseille", @"Paris", "Babeloued", "Kaboul", "En La 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return [sectionNames count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [rowLabels count];
+}
+
+- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
+	id theTitle = [sectionNames objectAtIndex:section]; 
+	
+	if ([theTitle isKindOfClass:[NSNull class]]) 
+		return nil; 
+	
+	return theTitle;
 }
 
 
@@ -97,11 +178,16 @@ NSString *CITY_NAMES[] = {@"Marseille", @"Paris", "Babeloued", "Kaboul", "En La 
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
     }
+	
+	NSUInteger row = [indexPath row];
+	NSString *rowLabel = [rowLabels objectAtIndex:row];
+
     
-    // Configure the cell...
-    
+    cell.detailTextLabel.text = [hotelDetailItems objectAtIndex: indexPath.row]; 
+	cell.textLabel.text       = rowLabel;
+	
     return cell;
 }
 

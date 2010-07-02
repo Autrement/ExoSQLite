@@ -10,8 +10,14 @@
 
 
 @interface ListViewController : UITableViewController {
+	
+	NSString * myName;
+	NSString * myCity;
 
 }
+
+@property (nonatomic, retain) NSString * myName;
+@property (nonatomic, retain) NSString * myCity;
 
 
 - (void)addHotel;

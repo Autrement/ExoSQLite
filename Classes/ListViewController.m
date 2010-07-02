@@ -11,6 +11,7 @@
 
 @implementation ListViewController
 
+@synthesize myName, myCity;
 
 #pragma mark -
 #pragma mark Initialization

@@ -12,8 +12,15 @@
 #define kLabelTag   1
 #define kTextFieldTag   2
 
+@class DetailViewController;
+
+
 @interface EditStringEditor : EditAttributeEditor {
+	DetailViewController *detailController;
 
 }
+
+@property (nonatomic, retain) DetailViewController *detailController;
+
 
 @end

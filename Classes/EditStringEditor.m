@@ -6,12 +6,48 @@
 //  Copyright 2010 SUPINFO. All rights reserved.
 //
 
-
+#include <sqlite3.h>
 #import "EditStringEditor.h"
-
+#import "DetailViewController.h"
+#import "ExoSQLiteAppDelegate.h"
 
 @implementation EditStringEditor
 
+@synthesize detailController;
+
+#pragma mark -
+
+- (void) updateDataFromDb {
+
+	NSError *error; 
+	if ([keyPath length] == 0)
+		NSLog(@"Error saving: %@", [error localizedDescription]); 
+		return;
+	
+	sqlite3 *db;
+	int dbrc; 
+	ExoSQLiteAppDelegate *appDelegate = (ExoSQLiteAppDelegate*)
+	[UIApplication sharedApplication].delegate;
+	const char* dbFilePathUTF8 = [appDelegate.dbFilePath UTF8String];
+	dbrc = sqlite3_open (dbFilePathUTF8, &db);
+	if (dbrc) {
+		NSLog (@"couldn't open db:");
+		return;
+	}
+	NSLog (@"opened db");
+	sqlite3_stmt *dbps;
+	NSString *insertStatementNS = [NSString stringWithFormat:
+								   @"UPDATE name SET %@ WHERE id = %d", keyPath, detailController.getIdHotel];
+	const char *insertStatement = [insertStatementNS UTF8String];
+	dbrc = sqlite3_prepare_v2 (db, insertStatement, -1, &dbps, NULL);
+	dbrc = sqlite3_step (dbps);
+
+	sqlite3_finalize (dbps);
+	sqlite3_close(db);
+	
+}
+
+#pragma mark View lifecycle
 /*
  - (id)initWithStyle:(UITableViewStyle)style {
  // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -163,7 +199,13 @@
  */
 
 -(IBAction)save { 
-
+	NSUInteger onlyRow[] = {0, 0}; 
+	NSIndexPath *onlyRowPath = [NSIndexPath indexPathWithIndexes:onlyRow length:2]; 
+	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:onlyRowPath]; 
+	UITextField *textField = (UITextField *)[cell.contentView viewWithTag:kTextFieldTag]; 
+	textField.text = keyPath;
+	self.updateDataFromDb;
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {

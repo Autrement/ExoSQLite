@@ -16,18 +16,20 @@
 	
 	UITableView * myTableView;
 	ListViewController * hotel;
-	NSString * idHotel;
+	int * idHotel;
 	
 @private
     
     NSArray * sectionNames;
     NSArray * rowLabels;
-    NSArray * rowKeys;
     NSArray * rowController;
 }
 
+-(void) setIdHotel:(int)wesh;
+-(int) getIdHotel;
+
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) IBOutlet ListViewController * hotel;
-@property (nonatomic, retain) NSString * idHotel;
+
 
 @end

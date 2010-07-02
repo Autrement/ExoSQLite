@@ -15,7 +15,7 @@
 
 @implementation DetailViewController
 
-@synthesize hotel, myTableView, idHotel;
+@synthesize hotel, myTableView;
 
 NSString *NAME_KEY = @"name";
 NSString *CITY_KEY = @"city";
@@ -45,7 +45,7 @@ NSMutableArray *hotelDetailItems;
 	
 	NSString *queryStatementNS =
 	(@"select %@, %@\
-	from hotellist where %@ = %@", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
+	from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
 
 	const char *queryStatement = [queryStatementNS UTF8String];
 	dbrc = sqlite3_prepare_v2 (db, queryStatement, -1, &dbps, NULL);
@@ -91,6 +91,16 @@ NSMutableArray *hotelDetailItems;
 	[self.tableView reloadData]; 
 }
 
+-(void)setIdHotel:(int)wesh {
+	idHotel = wesh;
+	
+}
+
+-(int)getIdHotel{
+	
+	return idHotel;
+	
+}
 
 #pragma mark Initialization
 

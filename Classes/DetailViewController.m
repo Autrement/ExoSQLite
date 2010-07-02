@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "ExoSQLiteAppDelegate.h"
 #import "ListViewController.h"
+#import "EditAttributeEditor.h"
 #include <sqlite3.h>
 
 
@@ -77,7 +78,7 @@ NSMutableArray *hotelDetailItems;
     
     rowLabels = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Name",@"Name"), NSLocalizedString(@"City",@"City"), nil];
     
-    rowController = [[NSArray alloc] initWithObjects:@"ManagedObjectStringEditor",@"ManagedObjectPickerEditor", nil];
+    rowController = [[NSArray alloc] initWithObjects:@"EditStringEditor",@"EditPickerEditor", nil];
     
     [super viewDidLoad];
 	
@@ -236,14 +237,21 @@ NSMutableArray *hotelDetailItems;
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+   
+	NSUInteger row = [indexPath row];
+	
+	NSString *controllerClassName = [rowController objectAtIndex:row];
+	NSString *rowLabel = [rowLabels objectAtIndex:row];
+	NSString *rowKey = [hotelDetailItems objectAtIndex: indexPath.row]; 
+	Class controllerClass = NSClassFromString(controllerClassName);
+	EditAttributeEditor *controller = [controllerClass alloc];
+	controller = [controller initWithStyle:UITableViewStyleGrouped];
+	controller.keyPath = rowKey;
+	controller.labelString = rowLabel;
+	controller.title = rowLabel;
+    
+	[self.navigationController pushViewController:controller animated:YES];
+	[controller release];
 }
 
 

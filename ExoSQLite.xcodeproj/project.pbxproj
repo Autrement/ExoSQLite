@@ -17,6 +17,8 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HomeViewController.m */; };
 		28F335F11007B36200424DE2 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* HomeViewController.xib */; };
+		58769EE711DCE36F000FE6A8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58769EE611DCE36E000FE6A8 /* libsqlite3.dylib */; };
+		58B7F2AE11DDF51200A2DA20 /* hotel.db in Resources */ = {isa = PBXBuildFile; fileRef = 58B7F2AD11DDF51200A2DA20 /* hotel.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		28C286E00D94DF7D0034E888 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		28F335F01007B36200424DE2 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		58769EE611DCE36E000FE6A8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		58B7F2AD11DDF51200A2DA20 /* hotel.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hotel.db; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ExoSQLite-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ExoSQLite-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +51,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				58769EE711DCE36F000FE6A8 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +69,7 @@
 				24BE403611DCC83000615ED1 /* ListViewController.m */,
 				24BE403811DCC84100615ED1 /* DetailViewController.h */,
 				24BE403911DCC84100615ED1 /* DetailViewController.m */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -80,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -95,11 +100,13 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58B7F2AD11DDF51200A2DA20 /* hotel.db */,
 				28F335F01007B36200424DE2 /* HomeViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ExoSQLite-Info.plist */,
@@ -110,6 +117,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58769EE611DCE36E000FE6A8 /* libsqlite3.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
@@ -168,6 +176,7 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				28F335F11007B36200424DE2 /* HomeViewController.xib in Resources */,
+				58B7F2AE11DDF51200A2DA20 /* hotel.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

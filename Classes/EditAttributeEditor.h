@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#define kNonEditableTextColor	[UIColor colorWithRed:.318 green:0.4 blue:.569 alpha:1.0]
 
 @interface EditAttributeEditor : UITableViewController {
 	NSString * keyPath;

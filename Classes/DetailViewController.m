@@ -56,8 +56,7 @@ NSMutableArray *hotelDetailItems;
 	sqlite3_stmt *dbps;
 	
 	NSString *queryStatementNS =
-	(@"select %@, %@\
-	 from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
+	(@"select %@, %@ from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
 	
 	const char *queryStatement = [queryStatementNS UTF8String];
 	dbrc = sqlite3_prepare_v2 (db, queryStatement, -1, &dbps, NULL);
@@ -78,7 +77,7 @@ NSMutableArray *hotelDetailItems;
 		[cityValue release];
 	}
 	
-	idHotel = nil;
+
 	sqlite3_finalize (dbps);
 	sqlite3_close(db);
 	

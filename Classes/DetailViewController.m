@@ -27,11 +27,12 @@ NSMutableArray *hotelDetailItems;
 #pragma mark -
 
 	
--(void)setIdHotel:(int)wesh {
+-(void)setIdHotel:(NSNumber *)wesh {
 	idHotel = wesh;
 }
 
--(int)getIdHotel{
+
+-(NSNumber *)getIdHotel{
 	return idHotel;
 }
 
@@ -55,8 +56,11 @@ NSMutableArray *hotelDetailItems;
 	
 	sqlite3_stmt *dbps;
 	
+	
+	int hotelId = [idHotel intValue];
+	
 	NSString *queryStatementNS =
-	(@"select %@, %@ from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, idHotel);
+	(@"select %@, %@ from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, hotelId);
 	
 	const char *queryStatement = [queryStatementNS UTF8String];
 	dbrc = sqlite3_prepare_v2 (db, queryStatement, -1, &dbps, NULL);
@@ -110,7 +114,7 @@ NSMutableArray *hotelDetailItems;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[self loadDataFromDb];
+//	[self loadDataFromDb];
 	[super viewWillAppear:animated];
 	[self.tableView reloadData]; 
 }

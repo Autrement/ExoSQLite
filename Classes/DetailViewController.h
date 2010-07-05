@@ -16,7 +16,7 @@
 	
 	UITableView * myTableView;
 	ListViewController * hotel;
-	int idHotel;
+	NSNumber * idHotel;
 	
 @private
     
@@ -27,9 +27,9 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) IBOutlet ListViewController * hotel;
-@property int idHotel;
+@property (nonatomic, retain) NSNumber * idHotel;
 
-- (void) setIdHotel:(int)wesh;
-- (int) getIdHotel;
+- (void) setIdHotel:(NSNumber *)wesh;
+- (NSNumber *) getIdHotel;
 
 @end

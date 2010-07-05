@@ -16,7 +16,6 @@
 
 @synthesize myTableView;
 
-NSString * PRIMARY_ID_KEY = @"primaryid";
 NSString * NAME_KEY = @"name";
 NSString * CITY_KEY = @"city";
 NSString * ID_KEY = @"id";
@@ -129,6 +128,8 @@ NSMutableArray * hotelList;
 - (void)viewDidLoad {
     
 	[super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
 }
 
@@ -144,9 +145,10 @@ NSMutableArray * hotelList;
 
 - (void)viewDidAppear:(BOOL)animated {
 
+    [super viewDidAppear:animated];
+    
     [self.myTableView beginUpdates];
     
-    [super viewDidAppear:animated];
 }
 
 /*
@@ -222,19 +224,31 @@ NSMutableArray * hotelList;
 */
 
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [hotelList removeObjectAtIndex: indexPath.row];
+
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        [self.myTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+  
 }
-*/
+
+//if (editingStyle == UITableViewCellEditingStyleDelete)
+//{
+//    [[self displayedObjects] removeObjectAtIndex:[indexPath row]];
+//    
+//    //  Animate deletion
+//    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+//    [[self tableView] deleteRowsAtIndexPaths:indexPaths
+//                            withRowAnimation:UITableViewRowAnimationFade];
+//}
+
+
 
 
 /*
@@ -266,6 +280,8 @@ NSMutableArray * hotelList;
 	 [detailViewController release];
 
 }
+
+
 
 
 #pragma mark -

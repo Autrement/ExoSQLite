@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExoSQLiteAppDelegate : NSObject <UIApplicationDelegate, UINavigationBarDelegate> {
+@interface ExoSQLiteAppDelegate : NSObject <UIApplicationDelegate> {
     
     UIWindow *window;
     UINavigationController *navigationController;
-    
-    NSString * dbFilePath;
-
+	NSString *dbFilePath;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, retain, readonly) NSString * dbFilePath;
-
+@property (nonatomic, retain, readonly) NSString *dbFilePath;
 
 @end
 

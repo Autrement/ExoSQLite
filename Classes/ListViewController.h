@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class DetailViewController;
+
 
 @interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>{
 
     UITableView * myTableView;
+    
+    DetailViewController * detailViewController;
 
 }
 
 @property (nonatomic, retain) UITableView * myTableView;
+@property (nonatomic, retain) IBOutlet DetailViewController * detailViewController;
+
 
 
 - (void)addHotel;

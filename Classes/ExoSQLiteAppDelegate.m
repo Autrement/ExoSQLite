@@ -19,8 +19,6 @@ NSString *DATABASE_RESOURCE_NAME = @"hotel";
 NSString *DATABASE_RESOURCE_TYPE = @"db";
 NSString *DATABASE_FILE_NAME = @"hotel.db";
 
-
-#pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL) initializeDb {
@@ -89,9 +87,6 @@ NSString *DATABASE_FILE_NAME = @"hotel.db";
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
-}
 
 
 #pragma mark -
@@ -100,7 +95,7 @@ NSString *DATABASE_FILE_NAME = @"hotel.db";
 - (void)dealloc {
 	[navigationController release];
 	[window release];
-    [dbFilePath release];
+	[dbFilePath release];
 	[super dealloc];
 }
 

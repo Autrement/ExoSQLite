@@ -14,15 +14,16 @@
 
 @implementation ListViewController
 
-@synthesize myTableView;
+@synthesize myTableView, detailViewController;
 
-NSString * NAME_KEY = @"name";
-NSString * CITY_KEY = @"city";
-NSString * ID_KEY = @"id";
+NSString * NAMEE_KEY = @"name";
+NSString * CITYY_KEY = @"city";
+NSString * IDD_KEY = @"id";
 
 NSString * SECTION_NAME [] = {@"Marseille", @"Nice", @"Berg"};
 
 NSMutableArray * hotelList;
+
 
 #pragma mark -
 #pragma mark Initialization
@@ -94,9 +95,9 @@ NSMutableArray * hotelList;
         
         NSMutableDictionary * rowDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
         
-            [rowDict setObject:nameValue forKey:NAME_KEY];
-            [rowDict setObject:cityValue forKey:CITY_KEY];
-            [rowDict setObject:idValue forKey:ID_KEY];
+            [rowDict setObject:nameValue forKey:NAMEE_KEY];
+            [rowDict setObject:cityValue forKey:CITYY_KEY];
+            [rowDict setObject:idValue forKey:IDD_KEY];
         
        // NSLog(@"%@", [rowDict description]); // Description OK 
 
@@ -204,8 +205,8 @@ NSMutableArray * hotelList;
     
 	NSDictionary *rowVals = (NSDictionary*) [hotelList objectAtIndex: indexPath.row];
     
-    cell.textLabel.text = [rowVals objectForKey:CITY_KEY];
-    cell.detailTextLabel.text = [rowVals objectForKey:NAME_KEY];
+    cell.textLabel.text = [rowVals objectForKey:CITYY_KEY];
+    cell.detailTextLabel.text = [rowVals objectForKey:NAMEE_KEY];
     
 	return cell;
     
@@ -238,18 +239,6 @@ NSMutableArray * hotelList;
   
 }
 
-//if (editingStyle == UITableViewCellEditingStyleDelete)
-//{
-//    [[self displayedObjects] removeObjectAtIndex:[indexPath row]];
-//    
-//    //  Animate deletion
-//    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-//    [[self tableView] deleteRowsAtIndexPaths:indexPaths
-//                            withRowAnimation:UITableViewRowAnimationFade];
-//}
-
-
-
 
 /*
 // Override to support rearranging the table view.
@@ -273,11 +262,8 @@ NSMutableArray * hotelList;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     
-    DetailViewController * detailViewController = [[DetailViewController alloc] init];
-     // ...
      // Pass the selected object to the new view controller.
 	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
 
 }
 
@@ -305,6 +291,8 @@ NSMutableArray * hotelList;
 
 
 - (void)dealloc {
+    
+    [detailViewController release];
     [super dealloc];
 }
 

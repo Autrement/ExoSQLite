@@ -9,11 +9,19 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ListViewController : UITableViewController {
+@interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>{
+
+    UITableView * myTableView;
 
 }
+
+@property (nonatomic, retain) UITableView * myTableView;
 
 
 - (void)addHotel;
 
+
 @end
+
+
+

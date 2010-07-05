@@ -7,13 +7,85 @@
 //
 
 #import "DetailViewController.h"
+#import "ExoSQLiteAppDelegate.h"
+#import "ListViewController.h"
+#import "EditAttributeEditor.h"
+#include <sqlite3.h>
 
 
 @implementation DetailViewController
 
+@synthesize hotel, myTableView, idHotel;
+
+NSString *NAME_KEY = @"name";
+NSString *CITY_KEY = @"city";
+NSString *ID_KEY   = @"id";
+
+
+NSMutableArray *hotelDetailItems;
 
 #pragma mark -
+
+	
+-(void)setIdHotel:(NSNumber *)wesh {
+	idHotel = wesh;
+}
+
+
+-(NSNumber *)getIdHotel{
+	return idHotel;
+}
+
 #pragma mark Initialization
+
+- (void) loadDataFromDb {
+	NSLog (@"loadDataFromDb");
+	
+	sqlite3 *db;
+	int dbrc; 
+	ExoSQLiteAppDelegate *appDelegate = (ExoSQLiteAppDelegate*) 
+	[UIApplication sharedApplication].delegate;
+	const char* dbFilePathUTF8 = [appDelegate.dbFilePath UTF8String];
+	dbrc = sqlite3_open (dbFilePathUTF8, &db);
+	if (dbrc) {
+		NSLog (@"couldn't open db:");
+		return;
+	}
+	NSLog (@"opened db");
+	
+	
+	sqlite3_stmt *dbps;
+	
+	
+	int hotelId = [idHotel intValue];
+	
+	NSString *queryStatementNS =
+	(@"select %@, %@ from hotellist where %@ = %d", NAME_KEY, CITY_KEY, ID_KEY, hotelId);
+	
+	const char *queryStatement = [queryStatementNS UTF8String];
+	dbrc = sqlite3_prepare_v2 (db, queryStatement, -1, &dbps, NULL);
+	NSLog (@"prepared statement");
+	
+	[hotelDetailItems release];
+	hotelDetailItems = [[NSMutableArray alloc] initWithCapacity: 100];
+	
+	while ((dbrc = sqlite3_step (dbps)) == SQLITE_ROW) {
+		
+		NSString *nameValue = [[NSString alloc]
+							   initWithUTF8String: (char*) sqlite3_column_text (dbps, 0)];
+		NSString *cityValue = [[NSString alloc] 
+							   initWithUTF8String: (char*) sqlite3_column_text (dbps, 1)];
+		[hotelDetailItems addObject:nameValue];
+		[hotelDetailItems addObject:cityValue];
+		[nameValue release];
+		[cityValue release];
+	}
+	
+
+	sqlite3_finalize (dbps);
+	sqlite3_close(db);
+	
+}
 
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -28,23 +100,24 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
 - (void)viewDidLoad {
+    
+    sectionNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Description Hôtel", @"Description"), nil];
+    
+    rowLabels = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Name",@"Name"), NSLocalizedString(@"City",@"City"), nil];
+    
+    rowController = [[NSArray alloc] initWithObjects:@"EditStringEditor",@"EditPickerEditor", nil];
+    
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	
 }
-*/
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+//	[self loadDataFromDb];
+	[super viewWillAppear:animated];
+	[self.tableView reloadData]; 
 }
-*/
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -74,13 +147,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return [sectionNames count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [rowLabels count];
+}
+
+- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
+	id theTitle = [sectionNames objectAtIndex:section]; 
+	
+	if ([theTitle isKindOfClass:[NSNull class]]) 
+		return nil; 
+	
+	return theTitle;
 }
 
 
@@ -91,11 +173,16 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
     }
+	
+	NSUInteger row = [indexPath row];
+	NSString *rowLabel = [rowLabels objectAtIndex:row];
+
     
-    // Configure the cell...
-    
+    cell.detailTextLabel.text = [hotelDetailItems objectAtIndex: indexPath.row]; 
+	cell.textLabel.text       = rowLabel;
+	
     return cell;
 }
 
@@ -144,14 +231,21 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+   
+	NSUInteger row = [indexPath row];
+	
+	NSString *controllerClassName = [rowController objectAtIndex:row];
+	NSString *rowLabel = [rowLabels objectAtIndex:row];
+	NSString *rowKey = [hotelDetailItems objectAtIndex: indexPath.row]; 
+	Class controllerClass = NSClassFromString(controllerClassName);
+	EditAttributeEditor *controller = [controllerClass alloc];
+	controller = [controller initWithStyle:UITableViewStyleGrouped];
+	controller.keyPath = rowKey;
+	controller.labelString = rowLabel;
+	controller.title = rowLabel;
+    
+	[self.navigationController pushViewController:controller animated:YES];
+	[controller release];
 }
 
 

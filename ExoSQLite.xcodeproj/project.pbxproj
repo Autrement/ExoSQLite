@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,10 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		243F515111DDDBAF00C76551 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 243F515011DDDBAF00C76551 /* libsqlite3.dylib */; };
+		243F516011DDDFD000C76551 /* EditAttributeEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F515F11DDDFD000C76551 /* EditAttributeEditor.m */; };
+		243F517311DDE1BC00C76551 /* EditStringEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F517211DDE1BC00C76551 /* EditStringEditor.m */; };
+		243F51C111DDEB6C00C76551 /* EditPickerEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F51C011DDEB6C00C76551 /* EditPickerEditor.m */; };
 		24BE403711DCC83000615ED1 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BE403611DCC83000615ED1 /* ListViewController.m */; };
 		24BE403A11DCC84100615ED1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BE403911DCC84100615ED1 /* DetailViewController.m */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -25,6 +29,13 @@
 		1D3623250D0F684500981E51 /* ExoSQLiteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExoSQLiteAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* ExoSQLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExoSQLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		243F515011DDDBAF00C76551 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		243F515E11DDDFD000C76551 /* EditAttributeEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAttributeEditor.h; sourceTree = "<group>"; };
+		243F515F11DDDFD000C76551 /* EditAttributeEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAttributeEditor.m; sourceTree = "<group>"; };
+		243F517111DDE1BC00C76551 /* EditStringEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditStringEditor.h; sourceTree = "<group>"; };
+		243F517211DDE1BC00C76551 /* EditStringEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditStringEditor.m; sourceTree = "<group>"; };
+		243F51BF11DDEB6C00C76551 /* EditPickerEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPickerEditor.h; sourceTree = "<group>"; };
+		243F51C011DDEB6C00C76551 /* EditPickerEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPickerEditor.m; sourceTree = "<group>"; };
 		24BE403511DCC83000615ED1 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		24BE403611DCC83000615ED1 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		24BE403811DCC84100615ED1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -47,6 +58,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				243F515111DDDBAF00C76551 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +76,12 @@
 				24BE403611DCC83000615ED1 /* ListViewController.m */,
 				24BE403811DCC84100615ED1 /* DetailViewController.h */,
 				24BE403911DCC84100615ED1 /* DetailViewController.m */,
+				243F515E11DDDFD000C76551 /* EditAttributeEditor.h */,
+				243F515F11DDDFD000C76551 /* EditAttributeEditor.m */,
+				243F517111DDE1BC00C76551 /* EditStringEditor.h */,
+				243F517211DDE1BC00C76551 /* EditStringEditor.m */,
+				243F51BF11DDEB6C00C76551 /* EditPickerEditor.h */,
+				243F51C011DDEB6C00C76551 /* EditPickerEditor.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -113,6 +131,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				243F515011DDDBAF00C76551 /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,7 +162,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ExoSQLite" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -183,6 +202,9 @@
 				28C286E10D94DF7D0034E888 /* HomeViewController.m in Sources */,
 				24BE403711DCC83000615ED1 /* ListViewController.m in Sources */,
 				24BE403A11DCC84100615ED1 /* DetailViewController.m in Sources */,
+				243F516011DDDFD000C76551 /* EditAttributeEditor.m in Sources */,
+				243F517311DDE1BC00C76551 /* EditStringEditor.m in Sources */,
+				243F51C111DDEB6C00C76551 /* EditPickerEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +247,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1.3;
+				SDKROOT = iphonesimulator3.2;
 			};
 			name = Debug;
 		};
@@ -239,7 +261,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1.3;
+				SDKROOT = iphonesimulator3.2;
 			};
 			name = Release;
 		};

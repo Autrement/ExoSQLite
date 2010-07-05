@@ -1,19 +1,38 @@
 //
-//  ListViewController.m
+//  EditAttributeEditor.m
 //  ExoSQLite
 //
-//  Created by fj on 01/07/10.
+//  Created by fj on 02/07/10.
 //  Copyright 2010 SUPINFO. All rights reserved.
 //
 
-#import "ListViewController.h"
+#import "EditAttributeEditor.h"
 
 
-@implementation ListViewController
+@implementation EditAttributeEditor
 
-@synthesize myName, myCity;
+@synthesize labelString, keyPath;
+
 
 #pragma mark -
+
+-(IBAction)cancel { 
+	
+	[self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+-(IBAction)save { 
+	// Objective-C has no support for abstract methods, so we're going 
+	// to take matters into our own hands. 
+    
+	NSException * ex = [NSException exceptionWithName:@"Abstract Method Not Overridden" 
+                                               reason:NSLocalizedString(@"You MUST override the save method",@"You MUST override the save method") 
+                                             userInfo:nil];
+    [ex raise];
+    
+}
+
 #pragma mark Initialization
 
 /*
@@ -33,19 +52,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
- 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 */
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
+	
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
+                                     initWithTitle:NSLocalizedString(@"Cancel", @"Cancel - for button to cancel changes")
+                                     style:UIBarButtonSystemItemCancel 
+                                     target:self 
+                                     action:@selector(cancel)];
+	self.navigationItem.leftBarButtonItem = cancelButton; 
+	[cancelButton release]; 
+	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save",@"Save - for button to save changes")
+																   style:UIBarButtonItemStyleDone 
+																  target:self 
+																  action:@selector(save)];
+	self.navigationItem.rightBarButtonItem = saveButton; 
+	[saveButton release];	
     [super viewWillAppear:animated];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -75,7 +104,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 
@@ -102,43 +131,44 @@
 
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+ }   
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }   
+ }
+ */
 
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
 
 
 #pragma mark -
@@ -171,12 +201,10 @@
     // For example: self.myOutlet = nil;
 }
 
-- (void)addHotel {
-
-}
-
 
 - (void)dealloc {
+	[keyPath release];
+    [labelString release];
     [super dealloc];
 }
 
